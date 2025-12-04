@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_employee_home"
+            android:icon="@android:drawable/ic_menu_rotate"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/nav_employee_tasks"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="My Tasks" />
+        <item
+            android:id="@+id/nav_employee_calendar"
+            android:icon="@android:drawable/ic_menu_my_calendar"
+            android:title="Calendar" />
+        
+        <item android:title="Work &amp; Performance">
+            <menu>
+                <item
+                    android:id="@+id/nav_employee_attendance"
+                    android:icon="@android:drawable/ic_menu_recent_history"
+                    android:title="Attendance" />
+                <item
+                    android:id="@+id/nav_employee_sales"
+                    android:icon="@android:drawable/ic_menu_upload"
+                    android:title="Sales" />
+                <item
+                    android:id="@+id/nav_employee_reports"
+                    android:icon="@android:drawable/ic_menu_report_image"
+                    android:title="Reports" />
+            </menu>
+        </item>
+
+        <item android:title="CRM">
+            <menu>
+                <item
+                    android:id="@+id/nav_employee_leads"
+                    android:icon="@android:drawable/ic_menu_sort_by_size"
+                    android:title="Leads" />
+                <item
+                    android:id="@+id/nav_employee_deals"
+                    android:icon="@android:drawable/ic_menu_sort_by_size"
+                    android:title="Deals" />
+                <item
+                    android:id="@+id/nav_employee_customers"
+                    android:icon="@android:drawable/ic_menu_myplaces"
+                    android:title="Customers" />
+                <item
+                    android:id="@+id/nav_employee_companies"
+                    android:icon="@android:drawable/ic_menu_share"
+                    android:title="Companies" />
+            </menu>
+        </item>
+
+        <item android:title="Organization">
+            <menu>
+                <item
+                    android:id="@+id/nav_employee_contact"
+                    android:icon="@android:drawable/ic_menu_call"
+                    android:title="Contact Directory" />
+                <item
+                    android:id="@+id/nav_employee_company"
+                    android:icon="@android:drawable/ic_menu_info_details"
+                    android:title="Company Info" />
+            </menu>
+        </item>
+    </group>
+
+    <item android:title="Account">
+        <menu>
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@android:drawable/ic_menu_myplaces"
+                android:title="Profile" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@android:drawable/ic_lock_power_off"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+</menu>

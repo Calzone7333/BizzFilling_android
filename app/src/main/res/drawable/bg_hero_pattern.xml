@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="400dp"
+    android:height="300dp"
+    android:viewportWidth="400"
+    android:viewportHeight="300">
+
+    <!-- Background Gradient -->
+    <path
+        android:pathData="M0,0h400v300h-400z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:endX="400"
+                android:endY="300"
+                android:startX="0"
+                android:startY="0"
+                android:type="linear">
+                <item
+                    android:color="#FF0F766E"
+                    android:offset="0" />
+                <item
+                    android:color="#FF115E59"
+                    android:offset="1" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    
+    <!-- Bottom Wave -->
+    <path
+        android:pathData="M0,200 Q100,150 200,200 T400,200 V300 H0 Z"
+        android:fillAlpha="0.1">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:endX="400"
+                android:endY="300"
+                android:startX="0"
+                android:startY="200"
+                android:type="linear">
+                <item android:color="#FFFFFF" android:offset="0"/>
+                <item android:color="#00FFFFFF" android:offset="1"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Top Wave -->
+    <path
+        android:pathData="M200,0 Q300,100 400,0 V150 H200 Z"
+        android:fillAlpha="0.1"
+        android:fillColor="#FFFFFF"/>
+        
+    <!-- Circle 1: cx=350, cy=50, r=80 -->
+    <path
+        android:pathData="M270,50 a80,80 0 1,0 160,0 a80,80 0 1,0 -160,0"
+        android:fillAlpha="0.05"
+        android:fillColor="#FFFFFF"/>
+        
+    <!-- Circle 2: cx=50, cy=250, r=60 -->
+    <path
+        android:pathData="M-10,250 a60,60 0 1,0 120,0 a60,60 0 1,0 -120,0"
+        android:fillAlpha="0.05"
+        android:fillColor="#FFFFFF"/>
+
+</vector>
