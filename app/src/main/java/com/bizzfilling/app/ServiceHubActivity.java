@@ -37,7 +37,7 @@ public class ServiceHubActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.nav_home) {
-                    startActivity(new Intent(ServiceHubActivity.this, PublicHomeActivity.class));
+                    startActivity(new Intent(ServiceHubActivity.this, LoginActivity.class));
                     finish(); // Close this activity to go back
                     return true;
                 } else if (id == R.id.nav_services) {

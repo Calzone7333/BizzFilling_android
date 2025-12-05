@@ -15,6 +15,7 @@ import com.google.android.material.navigation.NavigationView;
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
+    private com.google.android.material.bottomnavigation.BottomNavigationView bottomNav;
 
     private String userRole = "USER"; // Default to USER
 
@@ -115,7 +116,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                 }
             }
             // Bottom Navigation
-            com.google.android.material.bottomnavigation.BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+            bottomNav = findViewById(R.id.bottom_navigation);
             if (bottomNav != null) {
                 // Set Menu based on Role
                 bottomNav.getMenu().clear();
@@ -125,36 +126,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                     bottomNav.inflateMenu(R.menu.menu_bottom_nav_user);
                 }
 
-                bottomNav.setOnNavigationItemSelectedListener(item -> {
-                    int id = item.getItemId();
-                    androidx.fragment.app.Fragment selectedFragment = null;
-
-                    // --- USER NAV ---
-                    if (id == R.id.nav_home) {
-                        if ("EMPLOYEE".equals(userRole)) selectedFragment = new EmployeeHomeFragment();
-                        else if ("AGENT".equals(userRole)) selectedFragment = new AgentHomeFragment();
-                        else selectedFragment = new HomeFragment();
-                    } else if (id == R.id.nav_services) {
-                        selectedFragment = new ServicesFragment();
-                    } else if (id == R.id.nav_profile) {
-                        selectedFragment = new ProfileFragment();
-                    } 
-                    
-                    // --- ADMIN NAV ---
-                    else if (id == R.id.nav_admin_dashboard) {
-                        selectedFragment = new AdminHomeFragment(); // Dashboard Stats
-                    } else if (id == R.id.nav_admin_home) {
-                        selectedFragment = new AdminWelcomeFragment(); // Welcome Screen
-                    } else if (id == R.id.nav_admin_settings) {
-                        selectedFragment = new AdminSettingsFragment();
-                    }
-
-                    if (selectedFragment != null) {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, selectedFragment).commit();
-                        return true;
-                    }
-                    return false;
-                });
+                bottomNav.setOnNavigationItemSelectedListener(this::onBottomNavItemSelected);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -166,6 +138,47 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                 .setCancelable(false)
                 .show();
         }
+    }
+
+    public void setBottomNavigationItem(int itemId) {
+        if (bottomNav != null && bottomNav.getSelectedItemId() != itemId) {
+            bottomNav.setOnNavigationItemSelectedListener(null);
+            bottomNav.setSelectedItemId(itemId);
+            bottomNav.setOnNavigationItemSelectedListener(this::onBottomNavItemSelected);
+        }
+    }
+
+    private boolean onBottomNavItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        androidx.fragment.app.Fragment selectedFragment = null;
+
+        // --- USER NAV ---
+        if (id == R.id.nav_home) {
+            if ("EMPLOYEE".equals(userRole)) selectedFragment = new EmployeeHomeFragment();
+            else if ("AGENT".equals(userRole)) selectedFragment = new AgentHomeFragment();
+            else selectedFragment = new HomeFragment();
+        } else if (id == R.id.nav_dashboard) {
+            selectedFragment = new UserReportsFragment(); // Using Reports as Dashboard for now
+        } else if (id == R.id.nav_settings) {
+            selectedFragment = new ProfileFragment(); // Using Profile as Settings for now
+        } else if (id == R.id.nav_orders) {
+            selectedFragment = new OrdersFragment();
+        } 
+        
+        // --- ADMIN NAV ---
+        else if (id == R.id.nav_admin_dashboard) {
+            selectedFragment = new AdminHomeFragment(); // Dashboard Stats
+        } else if (id == R.id.nav_admin_home) {
+            selectedFragment = new AdminWelcomeFragment(); // Welcome Screen
+        } else if (id == R.id.nav_admin_settings) {
+            selectedFragment = new AdminSettingsFragment();
+        }
+
+        if (selectedFragment != null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, selectedFragment).commit();
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -183,20 +196,11 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         androidx.fragment.app.Fragment selectedFragment = null;
 
         // --- USER ROUTES ---
-        if (id == R.id.nav_home) {
-            if ("ADMIN".equals(userRole)) {
-                selectedFragment = new AdminWelcomeFragment();
-            } else {
-                selectedFragment = new HomeFragment();
-            }
-        } else if (id == R.id.nav_services) {
-            selectedFragment = new ServicesFragment();
-        } else if (id == R.id.nav_orders) {
+        if (id == R.id.nav_orders) {
             selectedFragment = new OrdersFragment();
         } else if (id == R.id.nav_compliances) {
             selectedFragment = new CompliancesFragment();
-        } else if (id == R.id.nav_crm) {
-            selectedFragment = new CrmFragment();
+
         } else if (id == R.id.nav_documents) {
             selectedFragment = new DocumentsFragment();
         } else if (id == R.id.nav_calendar) {
@@ -278,17 +282,8 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         }
 
         // --- SHARED ROUTES ---
-        else if (id == R.id.nav_profile) {
-            selectedFragment = new ProfileFragment();
-        } else if (id == R.id.nav_logout) {
-            com.bizzfilling.app.utils.SessionManager sessionManager = new com.bizzfilling.app.utils.SessionManager(this);
-            sessionManager.logout();
-            Intent intent = new Intent(this, PublicHomeActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-            return true;
-        }
+        // Profile and Logout removed from Drawer
+
 
         if (selectedFragment != null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, selectedFragment).commit();

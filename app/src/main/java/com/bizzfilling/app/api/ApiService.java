@@ -27,6 +27,12 @@ public interface ApiService {
     @POST("api/auth/signup")
     Call<SignupResponse> signup(@Body SignupRequest request);
 
+    @POST("api/auth/request-email-otp")
+    Call<java.util.Map<String, String>> requestEmailOtp(@Body java.util.Map<String, String> body);
+
+    @POST("api/auth/reset-password")
+    Call<java.util.Map<String, String>> resetPassword(@Body java.util.Map<String, String> body);
+
     @GET("api/admin/dashboard-stats")
     Call<DashboardStatsResponse> getAdminDashboardStats();
 
@@ -53,4 +59,16 @@ public interface ApiService {
 
     @retrofit2.http.DELETE("api/admin/employees/{id}")
     Call<Void> deleteEmployee(@retrofit2.http.Path("id") String id);
+
+    @GET("api/user/me")
+    Call<com.bizzfilling.app.api.models.User> getUserProfile();
+
+    @retrofit2.http.Multipart
+    @retrofit2.http.PUT("api/user/me")
+    Call<com.bizzfilling.app.api.models.UpdateProfileResponse> updateProfile(
+        @retrofit2.http.Part("fullName") okhttp3.RequestBody fullName,
+        @retrofit2.http.Part("phone") okhttp3.RequestBody phone,
+        @retrofit2.http.Part("password") okhttp3.RequestBody password,
+        @retrofit2.http.Part okhttp3.MultipartBody.Part profileImage
+    );
 }

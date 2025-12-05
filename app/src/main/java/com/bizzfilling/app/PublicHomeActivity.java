@@ -56,19 +56,17 @@ public class PublicHomeActivity extends AppCompatActivity {
         servicesGrid.removeAllViews();
 
         String[] services = {
-            "Registration", "GST Filing", "Income Tax", "Trademark",
-            "Import/Export", "Legal Docs", "Accounting", "More"
+            "GST Registration", "Tax Filing", "Company Registration", 
+            "ISO Certification", "FSSAI Registration", "Import Export Code"
         };
         
         int[] icons = {
-            android.R.drawable.ic_menu_myplaces,
-            android.R.drawable.ic_menu_agenda,
-            android.R.drawable.ic_menu_sort_by_size,
-            android.R.drawable.ic_menu_view,
-            android.R.drawable.ic_menu_mapmode,
-            android.R.drawable.ic_menu_edit,
-            android.R.drawable.ic_menu_save,
-            android.R.drawable.ic_menu_add
+            R.drawable.ic_service_gst,
+            R.drawable.ic_service_tax,
+            R.drawable.ic_service_company,
+            R.drawable.ic_service_iso,
+            R.drawable.ic_service_fssai,
+            R.drawable.ic_service_ie_code
         };
 
         for (int i = 0; i < services.length; i++) {
@@ -79,14 +77,19 @@ public class PublicHomeActivity extends AppCompatActivity {
             ImageView imgIcon = serviceView.findViewById(R.id.imgServiceIcon);
             
             tvTitle.setText(services[i]);
-            if (i < icons.length) imgIcon.setImageResource(icons[i]);
+            if (i < icons.length) {
+                imgIcon.setImageResource(icons[i]);
+                imgIcon.setColorFilter(Color.parseColor("#2F5C46")); // Apply brand color tint
+                imgIcon.setBackgroundResource(R.drawable.bg_icon_circle);
+                imgIcon.setPadding(20, 20, 20, 20); // Adjust padding for custom icons
+            }
             
             // Layout params for Grid
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = 0;
             params.height = GridLayout.LayoutParams.WRAP_CONTENT;
             params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-            params.setMargins(8, 8, 8, 24);
+            params.setMargins(16, 16, 16, 32); // Increased margins
             serviceView.setLayoutParams(params);
             
             serviceView.setOnClickListener(v -> {
@@ -134,25 +137,6 @@ public class PublicHomeActivity extends AppCompatActivity {
         loadBanners();
         loadServices();
         setupAutoScroll();
-
-        // Bottom Navigation
-        com.google.android.material.bottomnavigation.BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-        if (bottomNav != null) {
-            bottomNav.setOnNavigationItemSelectedListener(item -> {
-                int id = item.getItemId();
-                if (id == R.id.nav_home) {
-                    return true;
-                } else if (id == R.id.nav_services) {
-                    Toast.makeText(PublicHomeActivity.this, "Please Login to view all Services", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(PublicHomeActivity.this, LoginActivity.class));
-                    return true;
-                } else if (id == R.id.nav_login) {
-                    startActivity(new Intent(PublicHomeActivity.this, LoginActivity.class));
-                    return true;
-                }
-                return false;
-            });
-        }
     }
 
     private void setupAutoScroll() {

@@ -234,13 +234,16 @@ public class HomeFragment extends Fragment {
     private void setupServiceClicks() {
         if (servicesGrid == null) return;
         
-        // We expect 3 children as per XML
+        // We expect 6 children as per XML
         for (int i = 0; i < servicesGrid.getChildCount(); i++) {
             View child = servicesGrid.getChildAt(i);
             final String serviceName;
             if (i == 0) serviceName = "GST Registration";
             else if (i == 1) serviceName = "Tax Filing";
-            else serviceName = "Company Registration";
+            else if (i == 2) serviceName = "Company Registration";
+            else if (i == 3) serviceName = "ISO Certification";
+            else if (i == 4) serviceName = "FSSAI Registration";
+            else serviceName = "Import Export Code";
             
             child.setOnClickListener(v -> {
                 if (getActivity() != null) {

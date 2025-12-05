@@ -4,26 +4,14 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@android:drawable/ic_menu_rotate"
-            android:title="Home" />
-        <item
-            android:id="@+id/nav_services"
-            android:icon="@android:drawable/ic_menu_view"
-            android:title="Services Hub" />
-        <item
-            android:id="@+id/nav_orders"
-            android:icon="@android:drawable/ic_menu_agenda"
-            android:title="My Orders" />
+
+
+
         <item
             android:id="@+id/nav_compliances"
             android:icon="@android:drawable/ic_menu_my_calendar"
             android:title="Compliances" />
-        <item
-            android:id="@+id/nav_crm"
-            android:icon="@android:drawable/ic_menu_sort_by_size"
-            android:title="CRM" />
+
         <item
             android:id="@+id/nav_documents"
             android:icon="@android:drawable/ic_menu_agenda"
@@ -46,17 +34,6 @@
             android:title="Company Details" />
     </group>
 
-    <item android:title="Account">
-        <menu>
-            <item
-                android:id="@+id/nav_profile"
-                android:icon="@android:drawable/ic_menu_myplaces"
-                android:title="Profile" />
-            <item
-                android:id="@+id/nav_logout"
-                android:icon="@android:drawable/ic_lock_power_off"
-                android:title="Logout" />
-        </menu>
-    </item>
+
 
 </menu>

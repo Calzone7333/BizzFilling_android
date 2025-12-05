@@ -19,6 +19,9 @@ public class User {
     @com.google.gson.annotations.SerializedName("walletBalance")
     private Double walletBalance;
 
+    @com.google.gson.annotations.SerializedName("phone")
+    private String phone;
+
     public String getId() {
         return id;
     }
@@ -29,6 +32,10 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 
     public String getRole() {

@@ -2,11 +2,11 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="300dp"
-    android:layout_height="180dp"
+    android:layout_height="160dp"
     android:layout_marginEnd="16dp"
-    app:cardBackgroundColor="#115E59"
-    app:cardCornerRadius="24dp"
-    app:cardElevation="4dp"
+    app:cardBackgroundColor="#2F5C46"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
     app:strokeWidth="0dp">
 
     <RelativeLayout
@@ -18,17 +18,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/img_banner_startup" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_card_overlay" />
+            android:src="@drawable/img_banner_startup"
+            android:alpha="0.2"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="24dp">
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/tvBannerTitle"
@@ -36,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:text="Start Your Business"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -44,24 +40,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvBannerTitle"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:text="Register your company in minutes."
-                android:textColor="#CCFFFFFF"
-                android:textSize="14sp" />
+                android:textColor="#E5E7EB"
+                android:textSize="13sp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBannerAction"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:background="@android:color/transparent"
-                android:paddingHorizontal="20dp"
-                android:text="Learn More →"
-                android:textColor="@color/white"
+                android:backgroundTint="@color/white"
+                android:text="Get Started"
+                android:textColor="#2F5C46"
                 android:textSize="12sp"
-                app:cornerRadius="20dp"
-                app:strokeColor="@color/white"
-                app:strokeWidth="1dp" />
+                android:textStyle="bold"
+                app:cornerRadius="8dp" />
         </RelativeLayout>
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

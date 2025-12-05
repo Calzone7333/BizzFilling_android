@@ -96,7 +96,7 @@ public class AdminWelcomeFragment extends Fragment {
                 com.bizzfilling.app.utils.SessionManager sessionManager = new com.bizzfilling.app.utils.SessionManager(getContext());
                 sessionManager.logout();
                 
-                android.content.Intent intent = new android.content.Intent(getContext(), com.bizzfilling.app.PublicHomeActivity.class);
+                android.content.Intent intent = new android.content.Intent(getContext(), com.bizzfilling.app.LoginActivity.class);
                 intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK | android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 if (getActivity() != null) getActivity().finish();

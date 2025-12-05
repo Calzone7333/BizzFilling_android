@@ -16,16 +16,17 @@ import com.bizzfilling.app.api.ApiClient;
 import com.bizzfilling.app.api.ApiService;
 import com.bizzfilling.app.api.models.LoginRequest;
 import com.bizzfilling.app.api.models.LoginResponse;
-import com.google.android.material.textfield.TextInputEditText;
+import android.widget.EditText;
+// import com.google.android.material.textfield.TextInputEditText; // Removed
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
-    private TextInputEditText etEmail, etPassword;
-    private Button btnLogin, btnEmailMode, btnPhoneMode;
+    private EditText etEmail, etPassword;
+    private Button btnLogin;
     // private LinearLayout emailLoginForm; // Not strictly needed unless toggling visibility
 
     @Override
@@ -37,9 +38,38 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
-        btnEmailMode = findViewById(R.id.btnEmailMode);
-        btnPhoneMode = findViewById(R.id.btnPhoneMode);
         // emailLoginForm = findViewById(R.id.emailLoginForm);
+
+        // --- ANIMATIONS ---
+        // --- ANIMATIONS ---
+        try {
+            android.view.animation.Animation slideUp = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.item_animation_slide_up);
+            android.view.animation.Animation fadeIn = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.fade_in);
+            
+            View ivIllustration = findViewById(R.id.ivIllustration);
+            View tvWelcome = findViewById(R.id.tvWelcome);
+            View tvSubtitle = findViewById(R.id.tvSubtitle);
+            View layoutEmail = findViewById(R.id.layoutEmail);
+            View layoutPassword = findViewById(R.id.layoutPassword);
+            View btnLogin = findViewById(R.id.btnLogin);
+
+            if (ivIllustration != null) ivIllustration.startAnimation(fadeIn);
+            if (tvWelcome != null) tvWelcome.startAnimation(slideUp);
+            if (tvSubtitle != null) tvSubtitle.startAnimation(slideUp);
+            if (layoutEmail != null) layoutEmail.startAnimation(slideUp);
+            if (layoutPassword != null) layoutPassword.startAnimation(slideUp);
+            if (btnLogin != null) btnLogin.startAnimation(slideUp);
+            
+            // Back Button Listener
+            View btnBack = findViewById(R.id.btnBack);
+            if (btnBack != null) {
+                btnBack.setOnClickListener(v -> finish());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace(); // Prevent crash if animation fails
+        }
+        // ------------------
 
         // --- GLOBAL CRASH HANDLER ---
         final Thread.UncaughtExceptionHandler defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
@@ -78,7 +108,8 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                         if (!isNetworkAvailable()) {
-                            Toast.makeText(LoginActivity.this, "No Internet Connection. Please check your network.", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(LoginActivity.this, NoInternetActivity.class);
+                            startActivity(intent);
                             return;
                         }
 
@@ -155,11 +186,7 @@ public class LoginActivity extends AppCompatActivity {
             });
         }
 
-        if (btnPhoneMode != null) {
-            btnPhoneMode.setOnClickListener(v -> 
-                Toast.makeText(LoginActivity.this, "Phone Login coming soon", Toast.LENGTH_SHORT).show()
-            );
-        }
+
 
         TextView tvSignupLink = findViewById(R.id.tvSignupLink);
         if (tvSignupLink != null) {

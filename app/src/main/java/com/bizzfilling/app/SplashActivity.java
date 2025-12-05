@@ -39,8 +39,8 @@ public class SplashActivity extends AppCompatActivity {
                         intent = new Intent(SplashActivity.this, DashboardActivity.class);
                         intent.putExtra("ROLE", sessionManager.getRole());
                     } else {
-                        // User is not logged in, go to Public Home
-                        intent = new Intent(SplashActivity.this, PublicHomeActivity.class);
+                        // User is not logged in, go to Login
+                        intent = new Intent(SplashActivity.this, LoginActivity.class);
                     }
 
                     startActivity(intent);
